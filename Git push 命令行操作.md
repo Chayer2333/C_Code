@@ -23,7 +23,9 @@
 #### 3. 测试是否能连接到GitHub的HTTPS端口（443端口）
     Test-NetConnection github.com -Port 443
 
-* *主要是443端口*
+* *主要是443端口* 
+
+    $22：ssh \ ,\  443:https$
 
 ## *解决方案*
 
