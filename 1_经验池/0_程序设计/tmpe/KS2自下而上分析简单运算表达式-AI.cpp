@@ -53,9 +53,10 @@ char peek(Stack *s) {
 }
 
 // 运算符优先级比较
-// 返回: 1 表示 op1 优先级高于 op2
+// 返回:
+//       1 表示 op1 优先级高于 op2
 //       0 表示 op1 优先级等于 op2
-//       -1 表示 op1 优先级低于 op2
+//      -1 表示 op1 优先级低于 op2
 int precedence(char op1, char op2) {
     int p1, p2;
     
