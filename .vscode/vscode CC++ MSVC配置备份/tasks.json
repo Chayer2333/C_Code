@@ -1,0 +1,56 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "cl",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/Fo:Buffer/",      // .obj文件输出到Buffer文件夹
+                "/Fd:Buffer/",      // .pdb文件输出到Buffer文件夹
+                "/Fe:EXE/main.exe", // .exe文件输出到EXE文件夹
+                "${workspaceFolder}/src/main.cpp",
+                "/link",            // 添加链接器参数分隔符
+                "/INCREMENTAL",     // 启用增量链接（生成.ilk文件）
+                "/ILK:Buffer/main.ilk",  // .ilk文件输出到Buffer
+                "/PDB:Buffer/main.pdb",  // 链接器 .pdb (main.pdb)
+                "/DEBUG"            // 生成调试信息（与/Zi对应）
+            ],
+            "group": "build",
+            "problemMatcher": [
+                "$msCompile"
+            ]
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: cl.exe 生成活动文件",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/nologo",
+                "/Fo:Buffer/",      // .obj文件输出到Buffer文件夹
+                "/Fd:Buffer/",      // .pdb文件输出到Buffer文件夹
+                "/FeEXE/${fileBasenameNoExtension}.exe",  // .exe文件输出到EXE文件夹
+                "${file}",
+                "/link",            // 链接器参数
+                "/INCREMENTAL",     // 生成.ilk文件
+                "/ILK:Buffer/${fileBasenameNoExtension}.ilk", // .ilk文件输出位置
+                "/PDB:Buffer/${fileBasenameNoExtension}.pdb"  // 链接器 .pdb
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "编译器: cl.exe"
+        }
+    ]
+}
