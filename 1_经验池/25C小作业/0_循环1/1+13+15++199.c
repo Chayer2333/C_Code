@@ -3,7 +3,7 @@ int main()
 {
 	double i,sum=0;
 	printf("1+1/3+…1/99:\n");
-	for(i=1;i<=99;i+=2)
+	for(i=1;i<=99;i+=2)		// 循环变量i从1开始，每次增加2，直到99
 	{
 		sum+=1/i;
 	}
