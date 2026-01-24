@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "MSVC 混合标准",
+            "name": "C/C++: cl.exe 构建和调试活动文件",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "E:/8_Buffer/C_Compile/EXE/${fileBasenameNoExtension}.exe",  // 从EXE文件夹启动
@@ -12,18 +12,6 @@
             "environment": [],
             "console": "integratedTerminal",
             "preLaunchTask": "C/C++: cl.exe 生成活动文件"
-        },
-         {
-            "name": "MSVC C17标准",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "E:/8_Buffer/C_Compile/EXE/${fileBasenameNoExtension}.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "E:/8_Buffer/C_Compile/EXE",
-            "environment": [],
-            "console": "integratedTerminal",
-            "preLaunchTask": "MSVC C17标准" // 关键：关联到新的C17编译任务
         }
     ]
 }
