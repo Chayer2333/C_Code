@@ -27,6 +27,7 @@ int main() {
             __FILE__, __LINE__, __DATE__, __TIME__);
     
     // 关于编译器差异详见：[1_经验池\C语言进阶知识\关于编译标准.md]
+    // system("pause");
 
     return 0;
 }
