@@ -24,6 +24,6 @@ int main() {
         if (_MSVC_LANG >= 201710L) printf("(编译器自认为处于 C++17 或更高模式)\n");
     #endif
 
-    system("pause");
+    system("pause");    // 输出："请按任意键继续. . ." 且需要按键确认 
     return 0;
 }

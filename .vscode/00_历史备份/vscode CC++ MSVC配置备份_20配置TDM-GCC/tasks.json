@@ -52,7 +52,7 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": false  // 设为false，不覆盖默认MSVC任务
+                "isDefault": false // 设为false，不覆盖你原有的默认MSVC任务
             },
             "detail": "使用独立TDM-GCC编译，标准C17"        // 任务描述
         }

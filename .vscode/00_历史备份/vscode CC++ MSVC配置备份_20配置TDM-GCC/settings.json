@@ -1,9 +1,16 @@
 {
-    "editor.fontLigatures": false,
+    "editor.fontLigatures": true,
     "json.schemaDownload.enable": true,
     "files.associations": {     // 文件关联配置
         "*.c": "c",             // .c文件关联到C语言
         "*.h": "c"              // .h文件也关联到C语言
+    },
+    "C_Cpp.default.compilerPath": "C:\\TDM-GCC-64\\bin\\gcc.exe",   // 默认编译器
+    "C_Cpp.default.intelliSenseMode": "gcc-x64",                    // IntelliSense模式
+    "C_Cpp.default.cStandard": "c17",                               // C语言标准
+    "editor.formatOnSave": false,                                   // 保存时不自动格式化
+    "[c]": {                                                        // C语言的特定设置
+        "editor.defaultFormatter": "ms-vscode.cpptools"             // 默认格式化工具
     },
     "json.schemas": [       // JSON模式定义（用于markdownlint）
         {
