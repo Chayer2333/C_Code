@@ -30,6 +30,7 @@
             "args": [
                 "/Zi",
                 "/EHsc",
+                "/nologo",
                 "/Fo:Buffer/",      // .obj文件输出到Buffer文件夹
                 "/Fd:Buffer/",      // .pdb文件输出到Buffer文件夹
                 "/FeEXE/${fileBasenameNoExtension}.exe",  // .exe文件输出到EXE文件夹
@@ -47,32 +48,8 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true   // 定义为默认使用的任务模式
+                "isDefault": true
             },
-            "detail": "编译器: cl.exe"
-        },
-        {
-            "type": "cppbuild",
-            "label": "MSVC C17标准", // 新任务：显式使用C17
-            "command": "cl.exe",
-            "args": [
-                "/std:c17",         // 核心修改：添加此选项以启用C17标准模式
-                "/Zi",
-                "/EHsc",
-                "/Fo:Buffer/",
-                "/Fd:Buffer/",                              // 仅有 /Fe 选项加 : 会导致错误
-                "/FeEXE/${fileBasenameNoExtension}.exe",   // 在 MSVC 中，许多编译选项（如 /Fe, /Fo, /Fd）支持紧凑格式：选项字母后直接拼接路径，中间不加冒号(:)或空格。
-                "${file}",
-                "/link",
-                "/INCREMENTAL",
-                "/ILK:Buffer/${fileBasenameNoExtension}.ilk",
-                "/PDB:Buffer/${fileBasenameNoExtension}.pdb"
-            ],
-            "options": {
-                "cwd": "E:/8_Buffer/C_Compile"
-            },
-            "problemMatcher": ["$msCompile"],
-            "group": { "kind": "build", "isDefault": false },
             "detail": "编译器: cl.exe"
         }
     ]

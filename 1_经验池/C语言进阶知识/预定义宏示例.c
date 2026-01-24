@@ -1,9 +1,11 @@
 #include <stdio.h>
+int What_Standard(); // 判断标准函数
  
 /* 
  * 预定义宏演示程序
  * 展示ANSI C标准中常用的预定义宏及其用途
  */
+
 int main() {
     // 打印当前源文件名（字符串常量）
     printf("当前文件: %s\n", __FILE__);
@@ -19,14 +21,13 @@ int main() {
         
     // 检查是否符合ANSI/ISO标准（1表示符合）
     What_Standard();
-        
+    
     // 实用示例：调试信息输出
     printf("\n[调试信息] %s (第%d行) 编译于 %s %s\n", 
             __FILE__, __LINE__, __DATE__, __TIME__);
     
-    printf("是否结束？");
-    getchar();
-    
+    // 关于编译器差异详见：[1_经验池\C语言进阶知识\关于编译标准.md]
+
     return 0;
 }
 
