@@ -1,0 +1,14 @@
+{   // 多根工作区
+    // 在资源管理器中双击打开
+    "folders": [
+        {
+            "name": "原项目目录 (ZH)",
+            "path": "E:\\2_Code\\00_C艹"
+        },
+        {
+            "name": "临时编译目录 (EN)",
+            "path": "E:\\8_Buffer\\C_Compile\\TDM-GCC"
+        }
+    ],
+    "settings": {}
+}
