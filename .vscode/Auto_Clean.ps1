@@ -4,7 +4,7 @@ param(
 )
 
 # 设置窗口标题
-$Host.UI.RawUI.WindowTitle = "=== TDM-GCC C/C++ Compiler ==="
+$Host.UI.RawUI.WindowTitle = "Hua Q - Compiler"
 
 # 获取当前工作目录
 $workspaceRoot = Get-Location
@@ -29,6 +29,7 @@ switch ($fileExtension) {
         $language = "C++"
         $compilerName = "G++"
     }
+    <#
     ".cxx" {
         $compiler = "C:\TDM-GCC-64\bin\g++.exe"
         $standard = "c++17"
@@ -47,9 +48,11 @@ switch ($fileExtension) {
         $language = "C++"
         $compilerName = "G++"
     }
+    #>
     default {
         Write-Host "ERROR: Unsupported file type: $fileExtension" -ForegroundColor Red
-        Write-Host "Supported extensions: .c, .cpp, .cxx, .cc, .c++" -ForegroundColor Yellow
+        Write-Host "Supported extensions: .c, .cpp" -ForegroundColor Yellow
+        # Write-Host "Supported extensions: .c, .cpp, .cxx, .cc, .c++" -ForegroundColor Yellow
         exit 1
     }
 }
@@ -59,18 +62,21 @@ $tempDir = "E:\8_Buffer\C_Compile\TDM-GCC\Temp"
 $exePath = Join-Path $tempDir "$baseName.exe"
 
 # 显示信息
-Write-Host "=== ====== ====== == TDM-GCC $language Compiler == ====== ====== ===" -ForegroundColor Cyan
+Write-Host "===== ====== ====== == TDM-GCC $language Compiler == ====== ====== =====" -ForegroundColor Cyan
 Write-Host "Language:      $language ($compilerName)" -ForegroundColor Gray
 Write-Host "Standard:      $standard" -ForegroundColor Gray
 Write-Host "Source:        $SourceFile" -ForegroundColor Gray
 Write-Host "Output:        $exePath" -ForegroundColor Gray
 Write-Host "Compiler:      $compiler" -ForegroundColor Gray
-Write-Host "`n"
+
+$divider1 = "-" * 100
 
 # ============================================
 # 第1步：清理前的准备工作（强制终止进程）
 # ============================================
 if (Test-Path $tempDir) {
+    Write-Host `n
+    Write-Host $divider1 -ForegroundColor DarkGray
     Write-Host "[Step 1/5] Preparing cleanup..." -ForegroundColor Yellow
     
     # 1. 尝试获取Temp文件夹中所有可能的exe进程
@@ -120,7 +126,7 @@ if (Test-Path $tempDir) {
     # 方法1：先尝试友好地终止当前编译的exe进程
     try {
         Get-Process -Name $currentExeName -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-        Write-Host "    * Stopped process: $currentExeName" -ForegroundColor DarkGreen
+        Write-Host "    * Stopped process: $currentExeName" -ForegroundColor Magenta
     }
     catch {
         # 忽略错误
@@ -132,7 +138,7 @@ if (Test-Path $tempDir) {
         if ($procName -ne $currentExeName) {  # 避免重复处理
             try {
                 Get-Process -Name $procName -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-                Write-Host "    * Stopped process: $procName" -ForegroundColor DarkGreen
+                Write-Host "    * Stopped process: $procName" -ForegroundColor Magenta
             }
             catch {
                 # 忽略错误
@@ -182,11 +188,19 @@ if (Test-Path $tempDir) {
         Start-Sleep -Milliseconds 500
     }
 }
+else {
+    Write-Host `n
+    Write-Host $divider1 -ForegroundColor DarkGray
+    Write-Host "[Step 1/5] Preparing cleanup..." -ForegroundColor Yellow
+    Write-Host "  - Cleanup Complete!" -ForegroundColor Green
+}
 
 # ============================================
 # 第2步：清理临时文件夹
 # ============================================
-Write-Host "`n[Step 2/5] Cleaning temporary folder..." -ForegroundColor Yellow
+Write-Host `n
+Write-Host $divider1 -ForegroundColor DarkGray
+Write-Host "[Step 2/5] Cleaning temporary folder..." -ForegroundColor Yellow
 
 # 尝试删除整个Temp文件夹（如果存在）
 $folderDeleted = $false
@@ -259,7 +273,9 @@ else {
 # 第3步：重新创建临时文件夹
 # ============================================
 if ($folderDeleted) {
-    Write-Host "`n[Step 3/5] Creating new temp folder..." -ForegroundColor Yellow
+    Write-Host `n
+    Write-Host $divider1 -ForegroundColor DarkGray
+    Write-Host "[Step 3/5] Creating new temp folder..." -ForegroundColor Yellow
     try {
         New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
         Write-Host "  - Temp folder created" -ForegroundColor Green
@@ -277,7 +293,9 @@ else {
 # ============================================
 # 第4步：编译
 # ============================================
-Write-Host "`n[Step 4/5] Compiling..." -ForegroundColor Yellow
+Write-Host `n
+Write-Host $divider1 -ForegroundColor DarkGray
+Write-Host "[Step 4/5] Compiling..." -ForegroundColor Yellow
 
 # 构建编译参数
 $compileArgs = @(
@@ -304,16 +322,21 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-Write-Host "  `n- Compilation successful!" -ForegroundColor Green
+Write-Host "`n  - Compilation successful!" -ForegroundColor Green
 
 # ============================================
 # 第5步：运行程序
 # ============================================
-Write-Host "`n[Step 5/5] Running program..." -ForegroundColor Yellow
-$divider = "-" * 100
-Write-Host $divider -ForegroundColor Gray
+Write-Host `n
+Write-Host $divider1 -ForegroundColor DarkGray
+Write-Host "[Step 5/5] Running program..." -ForegroundColor Yellow
+Write-Host "  - Open the Run window`n" -ForegroundColor Green
+
+$divider = "~-" * 50
+Write-Host $divider `n -ForegroundColor White
 
 # 运行程序
+$Host.UI.RawUI.WindowTitle = "$baseName"  # 设置标题为目标 (不带路径与后缀)
 $process = $null
 try {
     $process = Start-Process -FilePath $exePath -NoNewWindow -Wait -PassThru -ErrorAction Stop
@@ -321,18 +344,40 @@ try {
 catch {
     Write-Host "  - ERROR: Cannot run program" -ForegroundColor Red
     Write-Host "    $_" -ForegroundColor DarkRed
+    <#
+        运行不成功很可能是文件被 安全中心隔离 导致的，需要添加信任
+
+        解决方案：
+        # 以管理员身份运行PowerShell，然后执行：
+        Set-MpPreference -ExclusionPath "E:\8_Buffer\C_Compile\TDM-GCC\Temp"
+
+        # 检查排除项是否生效
+        Get-MpPreference | Select-Object -ExpandProperty ExclusionPath
+
+        也可以查看：安全中心 -> 病毒和威胁防护 -> 排除项
+    #>
 }
+Write-Host `n`n$divider -ForegroundColor White
+Write-Host "`n`n===== ====== ==== $language Program Execution Complete ==== ====== =====" -ForegroundColor Cyan
+Write-Host "  %" -ForegroundColor Cyan
 
-Write-Host $divider -ForegroundColor Gray
-
-if ($process) {
-    Write-Host "  - Program exit code: $($process.ExitCode)" -ForegroundColor Cyan
+if ($process) {     # 显示程序退出代码
+    Write-Host "  - Program exit code: " -ForegroundColor Cyan -NoNewline
+    Write-Host "$($process.ExitCode)" -ForegroundColor  DarkRed
+    
+    # Write-Host "  - Program exit code: $($process.ExitCode)" -ForegroundColor Cyan Magenta
+}
+else {
+    Write-Host "  - Program exit code: " -ForegroundColor Cyan -NoNewline
+    Write-Host "null" -ForegroundColor Gray
 }
 
 # ============================================
 # 第6步：程序运行后清理
 # ============================================
-Write-Host "`n[Cleanup] Removing executable..." -ForegroundColor Yellow
+Write-Host `n
+Write-Host $divider1 -ForegroundColor DarkGray
+Write-Host "[Cleanup] Removing executable..." -ForegroundColor Yellow
 
 # 等待程序完全退出
 Start-Sleep -Milliseconds 300
@@ -385,6 +430,6 @@ if ($exeDeleted -and (Test-Path $tempDir)) {
 }
 
 # 完成
-Write-Host "`n=== ==== === $language Program Compilation and Execution Complete === ==== ===" -ForegroundColor Cyan
-Write-Host "Press any key to exit..." -ForegroundColor Gray
-$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+Write-Host `n`n`n
+# Write-Host "`n`n`nPress any key to exit...`n`n`n" -ForegroundColor Gray
+# $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
