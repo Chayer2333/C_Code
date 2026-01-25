@@ -420,7 +420,7 @@ if ($exeDeleted -and (Test-Path $tempDir)) {
             Write-Host "  - Temp folder removed (empty)" -ForegroundColor Green
         }
         else {
-            Write-Host "  - Temp folder not empty, keeping it" -ForegroundColor Yellow
+            Write-Host "  - Temp folder not empty, keeping it" -ForegroundColor Red
             Write-Host "    Files remaining: $($items.Count)" -ForegroundColor DarkGray
         }
     }
