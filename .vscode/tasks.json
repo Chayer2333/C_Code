@@ -8,6 +8,7 @@
             "args": [
                 "/Zi",
                 "/EHsc",
+                // "/nologo",       // 隐藏版权信息
                 "/Fo:Buffer/",      // .obj文件输出到Buffer文件夹
                 "/Fd:Buffer/",      // .pdb文件输出到Buffer文件夹
                 "/FeEXE/${fileBasenameNoExtension}_MSVC.exe",  // .exe文件输出到EXE文件夹
