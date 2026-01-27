@@ -21,5 +21,11 @@
             ],
             "url": "file:///E:/8_Buffer/C_Compile/TDM-GCC/Config/markdownlint-config-schema.json" // 本地或镜像文件
         }
-    ]
+    ],
+//  {   配置翻译属性
+        "commentTranslate.targetLanguage": "zh-CN",
+        "commentTranslate.hover.enabled": true,
+        "commentTranslate.source": "Google",
+        "commentTranslate.multiLineMerge": false
+//  }
 }
