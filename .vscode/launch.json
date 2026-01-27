@@ -11,7 +11,7 @@
             "cwd": "E:/8_Buffer/C_Compile/MSVC/EXE",    // 工作目录设为缓存文件夹
             "environment": [],
             "console": "integratedTerminal",            // 使用集成终端     console 属性通常用于 cppvsdbg（MSVC调试器）
-            "preLaunchTask": "喵喵喵喵"                  // 需与 tasks "label" 字段保持一致
+            "preLaunchTask": "猫猫抛来一个程序喵"         // 需与 tasks "label" 字段保持一致
         },
         {
             "name": "TDM-GCC C17标准",      // 配置名称
