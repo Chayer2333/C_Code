@@ -2,6 +2,26 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Setup-MSVC-env",  // 添加 cl.exe 为 path 环境
+            "type": "shell",            // 失败,只能配置为局部环境使用(对于编译链来说)
+            
+            "command": "echo 正在尝试设置MSVC环境... && call \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvarsall.bat\" x64 && echo 环境设置成功！ || echo 环境设置失败！",
+            "args": [], // args 留空，因为命令已全部在 command 中
+            "options": {
+                // 👇 关键配置：指定使用纯 cmd.exe 作为执行环境
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": ["/c"]
+                }
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "isBackground": true
+        },
+        {
             "label": "喵喵喵喵",    // 需与 launch "preLaunchTask" 字段保持一致
             "type": "cppbuild",
             "command": "cl.exe",
@@ -29,6 +49,8 @@
                 "kind": "build",
                 "isDefault": true   // 定义为默认使用的任务模式
             },
+            // "dependsOn": ["Setup-MSVC-env"],    // 自动配置 cl.exe 的环境变量,依赖于 "label": "Setup-Msvc-Env"
+            // "dependsOrder": "sequence",
             "detail": "编译器: cl.exe"
         },
         {
