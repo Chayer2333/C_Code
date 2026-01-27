@@ -22,7 +22,7 @@
             "isBackground": true
         },
         {
-            "label": "喵喵喵喵",    // 需与 launch "preLaunchTask" 字段保持一致
+            "label": "猫猫抛来一个程序喵",    // 需与 launch "preLaunchTask" 字段保持一致
             "type": "cppbuild",
             "command": "cl.exe",
             "args": [
