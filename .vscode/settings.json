@@ -25,7 +25,7 @@
 //  {   配置翻译属性
         "commentTranslate.targetLanguage": "zh-CN",
         "commentTranslate.hover.enabled": true,
-        "commentTranslate.source": "Google",
+        "commentTranslate.source": "Bing",
         "commentTranslate.multiLineMerge": false
 //  }
 }
