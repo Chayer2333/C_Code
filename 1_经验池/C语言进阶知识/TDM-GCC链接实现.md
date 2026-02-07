@@ -77,6 +77,8 @@ gcc main.c factors.c -o perfect_number.exe
 ### **方式二：分步编译链接（适合大中型项目，更高效）**
 
 ```bash
+# 第零步：将bash跳转到项目目录
+
 # 第一步：分别编译，生成目标文件。`-c`选项告诉gcc“只做到汇编这一步，不要链接”。
 gcc -c main.c -o main.o
 gcc -c factors.c -o factors.o
