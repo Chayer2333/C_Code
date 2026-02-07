@@ -83,6 +83,9 @@ gcc -c factors.c -o factors.o
 
 # 第二步：链接目标文件，生成可执行程序。
 gcc main.o factors.o -o perfect_number.exe
+
+# 第三步：pwsh 运行程序
+.\perfect_number.exe
 ```
 
 **优势**：如果你只修改了 `factors.c`，你只需要重新执行 `gcc -c factors.c -o factors.o` 和第二步的链接命令即可。`main.c` 因为没变，其对应的 `main.o` 无需重新生成，节省时间。这是 `Makefile` 工作的基础原理。
