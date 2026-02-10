@@ -2,16 +2,16 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Setup-MSVC-env",  // 添加 cl.exe 为 path 环境
-            "type": "shell",            // 失败,只能配置为局部环境使用(对于编译链来说)
-            
+            "label": "Setup-MSVC-env",
+            "type": "shell",
             "command": "echo 正在尝试设置MSVC环境... && call \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build\\vcvarsall.bat\" x64 && echo 环境设置成功！ || echo 环境设置失败！",
-            "args": [], // args 留空，因为命令已全部在 command 中
+            "args": [],
             "options": {
-                // 👇 关键配置：指定使用纯 cmd.exe 作为执行环境
                 "shell": {
                     "executable": "cmd.exe",
-                    "args": ["/c"]
+                    "args": [
+                        "/c"
+                    ]
                 }
             },
             "problemMatcher": [],
@@ -22,22 +22,21 @@
             "isBackground": true
         },
         {
-            "label": "猫猫抛来一个程序喵",    // 需与 launch "preLaunchTask" 字段保持一致
+            "label": "猫猫抛来一个程序喵",
             "type": "cppbuild",
             "command": "cl.exe",
             "args": [
                 "/Zi",
                 "/EHsc",
-                // "/nologo",       // 隐藏版权信息
-                "/Fo:Buffer/",      // .obj文件输出到Buffer文件夹
-                "/Fd:Buffer/",      // .pdb文件输出到Buffer文件夹
-                "/FeEXE/${fileBasenameNoExtension}_MSVC.exe",  // .exe文件输出到EXE文件夹
+                "/Fo:Buffer/",
+                "/Fd:Buffer/",
+                "/FeEXE/${fileBasenameNoExtension}_MSVC.exe",
                 "${file}",
-                "/link",            // 添加链接器参数分隔符
-                "/INCREMENTAL",     // 启用增量链接（生成.ilk文件）
-                "/ILK:Buffer/${fileBasenameNoExtension}.ilk",  // .ilk文件输出位置
-                "/PDB:Buffer/${fileBasenameNoExtension}.pdb",  // 链接器 .pdb
-                "/DEBUG"            // 生成调试信息（与/Zi对应）
+                "/link",
+                "/INCREMENTAL",
+                "/ILK:Buffer/${fileBasenameNoExtension}.ilk",
+                "/PDB:Buffer/${fileBasenameNoExtension}.pdb",
+                "/DEBUG"
             ],
             "options": {
                 "cwd": "E:/8_Buffer/C_Compile/MSVC"
@@ -47,37 +46,55 @@
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true   // 定义为默认使用的任务模式
+                "isDefault": true
             },
-            // "dependsOn": ["Setup-MSVC-env"],    // 自动配置 cl.exe 的环境变量,依赖于 "label": "Setup-Msvc-Env"
-            // "dependsOrder": "sequence",
             "detail": "编译器: cl.exe"
         },
         {
             "label": "TDM-GCC C17标准",
             "type": "shell",
-            "command": "powershell",                            // 运行的任务
-            "args": [                                           // 4. 传递给命令的参数
-                "-ExecutionPolicy",                             // 绕过执行策略限制
-                "Bypass",                                       // 允许运行脚本
-                "-File",                                        // 指定要运行的文件
-                "${workspaceFolder}/.vscode/Auto_Clean.ps1",    // 脚本路径及名称
-                "${file}"                                       // 当前文件路径
+            "command": "powershell",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}/.vscode/Auto_Clean.ps1",
+                "${file}"
             ],
-            /*"options": {
-                "cwd": "E:/8_Buffer/C_Compile/TDM-GCC" // 指向新的联接根目录
-            },*/
-            /*"options": {
-                "cwd": "C:/TDM-GCC-64/bin"
-            },*/
             "problemMatcher": [
-                "$gcc"              // 6. 问题匹配器（解析编译错误）
+                "$gcc"
             ],
             "group": {
                 "kind": "build",
-                "isDefault": false  // 设为false，不覆盖默认MSVC任务
+                "isDefault": false
             },
-            "detail": "使用独立TDM-GCC编译，标准C17"        // 任务描述
+            "detail": "使用独立TDM-GCC编译，标准C17"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: cl.exe 生成活动文件",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/Fo:Buffer/",
+                "/Fd:Buffer/",
+                "/FeEXE/${fileBasenameNoExtension}_MSVC.exe",
+                "${file}",
+                "/link",
+                "/INCREMENTAL",
+                "/ILK:Buffer/${fileBasenameNoExtension}.ilk",
+                "/PDB:Buffer/${fileBasenameNoExtension}.pdb",
+                "/DEBUG"
+            ],
+            "options": {
+                "cwd": "E:/8_Buffer/C_Compile/MSVC"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": "build",
+            "detail": "调试器生成的任务。"
         }
     ]
 }

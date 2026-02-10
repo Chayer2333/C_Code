@@ -1,41 +1,47 @@
 {
     "version": "0.2.0",
     "configurations": [
+
         {
             "name": "MSVC 混合标准",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "E:/8_Buffer/C_Compile/MSVC/EXE/${fileBasenameNoExtension}_MSVC.exe",  // 从EXE文件夹启动
+            "program": "E:/8_Buffer/C_Compile/MSVC/EXE/${fileBasenameNoExtension}_MSVC.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "E:/8_Buffer/C_Compile/MSVC/EXE",    // 工作目录设为缓存文件夹
+            "cwd": "E:/8_Buffer/C_Compile/MSVC/EXE",
             "environment": [],
-            "console": "integratedTerminal",            // 使用集成终端     console 属性通常用于 cppvsdbg（MSVC调试器）
-            "preLaunchTask": "猫猫抛来一个程序喵"         // 需与 tasks "label" 字段保持一致
+            "console": "integratedTerminal",
+            "preLaunchTask": "猫猫抛来一个程序喵"
         },
         {
-            "name": "TDM-GCC C17标准",      // 配置名称
-            "type": "cppvsdbg",             // 调试器类型
-            "request": "launch",            // 启动调试
-            "program": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",    // 要运行的程序
-            "args": [                       // 程序参数
+            "name": "TDM-GCC C17标准",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "args": [
                 "-ExecutionPolicy",
                 "Bypass",
                 "-File",
                 "${workspaceFolder}/.vscode/Auto_Clean.ps1",
                 "${file}"
             ],
-            "stopAtEntry": false,           // 不在入口点停止
-            // "cwd": "E:/8_Buffer/C_Compile/TDM-GCC",
-            "cwd": "${workspaceFolder}",    // 工作目录设为EXE文件夹
-            // "environment": [],
-            // "externalConsole": true,     // 使用独立的外部控制台窗口（传统CMD）
-            // "externalConsole": false,    // 使用VS Code的集成调试控制台（不推荐用于需要输入的程序）
-            // "console": "integratedTerminal",// 在集成终端中运行
-            "console": "externalTerminal",  // 改为外部终端，避免编码问题
-            "preLaunchTask": null,          // 启动前不执行任务
-            // "preLaunchTask": "TDM-GCC C17标准", // 必须与上方 tasks.json 中的 label 完全一致
-            // "internalConsoleOptions": "neverOpen"
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "console": "externalTerminal",
+            "preLaunchTask": null
+        },
+        {
+            "name": "C/C++: cl.exe 构建和调试活动文件",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "E:/8_Buffer/C_Compile/MSVC/EXE/${fileBasenameNoExtension}_MSVC.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "E:/8_Buffer/C_Compile/MSVC/EXE",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "C/C++: cl.exe 生成活动文件"
         }
     ]
 }
