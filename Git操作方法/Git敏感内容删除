@@ -66,5 +66,5 @@
     cd E:\2_Code\00_C艹
     powershell -File "CleanSensitiveFiles.ps1"
 ```
-
-***PS：如果遇到乱码问题，基本是控制台和脚本文件编码不一致造成的，需保存为 `UTF-8 with BOM`***
+***ps:Shell中粘贴键为：`ctrl+shift+v`***
+***pss：如果遇到乱码问题，基本是控制台和脚本文件编码不一致造成的，需保存为 `UTF-8 with BOM`***
