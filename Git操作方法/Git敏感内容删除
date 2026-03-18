@@ -31,8 +31,10 @@
 * 重命名
 
 ```Shell
-    git filter-repo --path-rename "Old":"New" --force
+    git filter-repo --path-rename 'Old:New' --force
 ```
+
+***ps:用单引号避免 `:` 解析错误***
 
 ***特别注意，Git使用正斜杠 ` / ` 而非反斜杠 ` \ `***
 
@@ -64,7 +66,9 @@
 ```Shell
     E:
     cd E:\2_Code\00_C艹
-    powershell -File "CleanSensitiveFiles.ps1"
+    powershell -File "CleanSensitiveFiles.ps1"  # 适用于输入完整路径
+    # 或者：
+    .\RenameSensitiveFiles.ps1
 ```
 ***ps:Shell中粘贴键为：`ctrl+shift+v`***
 ***pss：如果遇到乱码问题，基本是控制台和脚本文件编码不一致造成的，需保存为 `UTF-8 with BOM`***
