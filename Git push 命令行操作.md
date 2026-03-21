@@ -1,41 +1,41 @@
-# ***push Ê¹ÓÃËµÃ÷***
+ï»¿# ***push ä½¿ç”¨è¯´æ˜***
 
 ## *powershell & Git bash*
-*ÓÃÓÚGitÃüÁîĞĞ push µÄÖ¸Áî*
+*ç”¨äºGitå‘½ä»¤è¡Œ push çš„æŒ‡ä»¤*
 
     git add .
 
-    git commit -m " Ìá½»ËµÃ÷ "
+    git commit -m " æäº¤è¯´æ˜ "
 
     git push origin main
 
-* *origin main ÊÇ²Ö¿âÃû*
+* *origin main æ˜¯ä»“åº“å*
 
-## *Èç¹ûÁ´½Ó±¨´í*
-*Ê¹ÓÃ powershell ÔËĞĞÃüÁî²âÊÔÁ´½Ó*
+## *å¦‚æœé“¾æ¥æŠ¥é”™*
+*ä½¿ç”¨ powershell è¿è¡Œå‘½ä»¤æµ‹è¯•é“¾æ¥*
 
-#### 1. ²âÊÔÊÇ·ñÄÜ½âÎöGitHubÓòÃû
+#### 1. æµ‹è¯•æ˜¯å¦èƒ½è§£æGitHubåŸŸå
     nslookup github.com
 
-#### 2. ²âÊÔÊÇ·ñÄÜÁ¬½Óµ½GitHubµÄSSH¶Ë¿Ú£¨22¶Ë¿Ú£©
+#### 2. æµ‹è¯•æ˜¯å¦èƒ½è¿æ¥åˆ°GitHubçš„SSHç«¯å£ï¼ˆ22ç«¯å£ï¼‰
     Test-NetConnection github.com -Port 22
 
-#### 3. ²âÊÔÊÇ·ñÄÜÁ¬½Óµ½GitHubµÄHTTPS¶Ë¿Ú£¨443¶Ë¿Ú£©
+#### 3. æµ‹è¯•æ˜¯å¦èƒ½è¿æ¥åˆ°GitHubçš„HTTPSç«¯å£ï¼ˆ443ç«¯å£ï¼‰
     Test-NetConnection github.com -Port 443
 
-* *Ö÷ÒªÊÇ443¶Ë¿Ú* 
+* *ä¸»è¦æ˜¯443ç«¯å£* 
 
-    $22£ºssh \ ,\  443:https$
+    $22ï¼šssh \ ,\  443:https$
 
-## *½â¾ö·½°¸*
+## *è§£å†³æ–¹æ¡ˆ*
 
-### ÁÙÊ±ÎªËùÓĞ ***Git*** ²Ù×÷½ûÓÃ ***SSL*** ÑéÖ¤
-*´Ë²Ù×÷»á½µµÍ°²È«ĞÔ£¬Ê¹ÄãµÄ Git Á¬½ÓÈİÒ×ÊÜµ½ÖĞ¼äÈË¹¥»÷*
+### ä¸´æ—¶ä¸ºæ‰€æœ‰ ***Git*** æ“ä½œç¦ç”¨ ***SSL*** éªŒè¯
+*æ­¤æ“ä½œä¼šé™ä½å®‰å…¨æ€§ï¼Œä½¿ä½ çš„ Git è¿æ¥å®¹æ˜“å—åˆ°ä¸­é—´äººæ”»å‡»*
 
     git config --global http.sslVerify false
 
-* ÔÙ´Î³¢ÊÔ git fetch »ò git pull
+* å†æ¬¡å°è¯• git fetch æˆ– git pull
 
-**< *warning!* ±ØĞëÖØÆô http.sslVerify ! >**
+**< *warning!* å¿…é¡»é‡å¯ http.sslVerify ! >**
 
     git config --global http.sslVerify true

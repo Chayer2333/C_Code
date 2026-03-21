@@ -1,75 +1,75 @@
-# É¾³ı GitHub ÒÑÌá½»µÄÃô¸ĞÄÚÈİºÍÀúÊ·¼ÇÂ¼
+ï»¿# åˆ é™¤ GitHub å·²æäº¤çš„æ•æ„Ÿå†…å®¹å’Œå†å²è®°å½•
 
-## 0. °²×°²å¼ş
+## 0. å®‰è£…æ’ä»¶
 
 ```Shell
     pip install git-filter-repo
 ```
 
-## 1. ´´½¨±¸·İ
+## 1. åˆ›å»ºå¤‡ä»½
 
 ---
 
-## 2. ½øÈë²Ö¿âÄ¿Â¼£¬¼ì²é×´Ì¬
+## 2. è¿›å…¥ä»“åº“ç›®å½•ï¼Œæ£€æŸ¥çŠ¶æ€
 
 ```Shell
     E:
-    cd E:\2_Code\00_CÜ³
+    cd E:\2_Code\00_Cè‰¹
     git status
 ```
 
-Ó¦¸ÃÊä³ö `nothing to commit, working tree clean`¡£***ps:Èç¹ûÓĞÎ´Ìá½»µÄĞŞ¸Ä£¬ÇëÏÈ´¦Àí¡£***
+åº”è¯¥è¾“å‡º `nothing to commit, working tree clean`ã€‚***ps:å¦‚æœæœ‰æœªæäº¤çš„ä¿®æ”¹ï¼Œè¯·å…ˆå¤„ç†ã€‚***
 
-## 3. ³¹µ×É¾³ıÎÄ¼ş»òÖØÃüÃû
+## 3. å½»åº•åˆ é™¤æ–‡ä»¶æˆ–é‡å‘½å
 
-* É¾³ı
+* åˆ é™¤
 
 ```Shell
     git filter-repo --path "your file" --invert-paths --force
 ```
 
-* ÖØÃüÃû
+* é‡å‘½å
 
 ```Shell
     git filter-repo --path-rename 'Old:New' --force
 ```
 
-***ps:ÓÃµ¥ÒıºÅ±ÜÃâ `:` ½âÎö´íÎó***
+***ps:ç”¨å•å¼•å·é¿å… `:` è§£æé”™è¯¯***
 
-***ÌØ±ğ×¢Òâ£¬GitÊ¹ÓÃÕıĞ±¸Ü ` / ` ¶ø·Ç·´Ğ±¸Ü ` \ `***
+***ç‰¹åˆ«æ³¨æ„ï¼ŒGitä½¿ç”¨æ­£æ–œæ  ` / ` è€Œéåæ–œæ  ` \ `***
 
 ---
 
-## 4. ÖØĞÂ¹ØÁª*GitHub*²Ö¿â
+## 4. é‡æ–°å…³è”*GitHub*ä»“åº“
 
 ```Shell
-    git remote add origin <ÄãµÄÔ¶³Ì²Ö¿âURL>
+    git remote add origin <ä½ çš„è¿œç¨‹ä»“åº“URL>
 ```
 
-## 5. ¿ÉÑéÖ¤ÀúÊ·ÊÇ·ñÇå³ı
+## 5. å¯éªŒè¯å†å²æ˜¯å¦æ¸…é™¤
 
 ```Shell
-    git show <Ä³¸ö¾ÉcommitµÄ¹şÏ£>
+    git show <æŸä¸ªæ—§commitçš„å“ˆå¸Œ>
 ```
 
-## 6. Ç¿ÖÆÍÆËÍÖÁ²Ö¿â¸²¸ÇÀúÊ·
+## 6. å¼ºåˆ¶æ¨é€è‡³ä»“åº“è¦†ç›–å†å²
 
 ```Shell
     git push origin --force --all
-    git push origin --force --tags    # Èç¹ûÓĞ±êÇ©
+    git push origin --force --tags    # å¦‚æœæœ‰æ ‡ç­¾
 ```
 
 ---
 
-***ps:¿ÉÖ±½ÓÔËĞĞ½Å±¾£ºGit²Ù×÷·½·¨\CleanSensitiveFiles.ps1***
+***ps:å¯ç›´æ¥è¿è¡Œè„šæœ¬ï¼šGitæ“ä½œæ–¹æ³•\CleanSensitiveFiles.ps1***
 
 ```Shell
     E:
-    cd E:\2_Code\00_CÜ³
-    powershell -File "CleanSensitiveFiles.ps1"  # ÊÊÓÃÓÚÊäÈëÍêÕûÂ·¾¶
-    # »òÕß£º
+    cd E:\2_Code\00_Cè‰¹
+    powershell -File "CleanSensitiveFiles.ps1"  # é€‚ç”¨äºè¾“å…¥å®Œæ•´è·¯å¾„
+    # æˆ–è€…ï¼š
     .\RenameSensitiveFiles.ps1
 ```
 
-***ps:ShellÖĞÕ³Ìù¼üÎª£º`ctrl+shift+v`***
-***pss£ºÈç¹ûÓöµ½ÂÒÂëÎÊÌâ£¬»ù±¾ÊÇ¿ØÖÆÌ¨ºÍ½Å±¾ÎÄ¼ş±àÂë²»Ò»ÖÂÔì³ÉµÄ£¬Ğè±£´æÎª `UTF-8 with BOM`***
+***ps:Shellä¸­ç²˜è´´é”®ä¸ºï¼š`ctrl+shift+v`***
+***pssï¼šå¦‚æœé‡åˆ°ä¹±ç é—®é¢˜ï¼ŒåŸºæœ¬æ˜¯æ§åˆ¶å°å’Œè„šæœ¬æ–‡ä»¶ç¼–ç ä¸ä¸€è‡´é€ æˆçš„ï¼Œéœ€ä¿å­˜ä¸º `UTF-8 with BOM`***
