@@ -1,5 +1,5 @@
 ﻿// RSA_实验.cpp
-// 仿照整形链表实验代码风格实现 RSA 加解密（示例演示，使用 64 位整数实现）
+// 只有 gcc 才能编译！
 #include <stdio.h>
 #include <cstdlib>
 #include <ctime>
