@@ -11,7 +11,7 @@ using namespace std;
 #define AES128_KEY_SIZE 16
 
 // ========== AES S盒与逆S盒 ==========
-static const uint8_t sbox[256] = {
+static const uint8_t sbox[256]={
     0x63,0x7c,0x77,0x7b,0xf2,0x6b,0x6f,0xc5,0x30,0x01,0x67,0x2b,0xfe,0xd7,0xab,0x76,
     0xca,0x82,0xc9,0x7d,0xfa,0x59,0x47,0xf0,0xad,0xd4,0xa2,0xaf,0x9c,0xa4,0x72,0xc0,
     0xb7,0xfd,0x93,0x26,0x36,0x3f,0xf7,0xcc,0x34,0xa5,0xe5,0xf1,0x71,0xd8,0x31,0x15,
@@ -29,7 +29,7 @@ static const uint8_t sbox[256] = {
     0xe1,0xf8,0x98,0x11,0x69,0xd9,0x8e,0x94,0x9b,0x1e,0x87,0xe9,0xce,0x55,0x28,0xdf,
     0x8c,0xa1,0x89,0x0d,0xbf,0xe6,0x42,0x68,0x41,0x99,0x2d,0x0f,0xb0,0x54,0xbb,0x16
 };
-static const uint8_t inv_sbox[256] = {
+static const uint8_t inv_sbox[256]={
     0x52,0x09,0x6a,0xd5,0x30,0x36,0xa5,0x38,0xbf,0x40,0xa3,0x9e,0x81,0xf3,0xd7,0xfb,
     0x7c,0xe3,0x39,0x82,0x9b,0x2f,0xff,0x87,0x34,0x8e,0x43,0x44,0xc4,0xde,0xe9,0xcb,
     0x54,0x7b,0x94,0x32,0xa6,0xc2,0x23,0x3d,0xee,0x4c,0x95,0x0b,0x42,0xfa,0xc3,0x4e,
@@ -48,7 +48,7 @@ static const uint8_t inv_sbox[256] = {
     0x17,0x2b,0x04,0x7e,0xba,0x77,0xd6,0x26,0xe1,0x69,0x14,0x63,0x55,0x21,0x0c,0x7d
 };
 
-static const uint8_t Rcon[11] = {
+static const uint8_t Rcon[11]={
     0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
 };
 
@@ -83,14 +83,14 @@ int main() {
     while (1) {
         Menu();
         cin >> c;
-        choice = input(c);
+        choice=input(c);
         clearInputBuffer();
 
         if (choice == 0) {
             printf("程序退出。\n");
             break;
         }
-        if (choice < 1 || choice > 2) {
+        if (choice<1 || choice > 2) {
             printf("无效选项，请重新选择。\n");
             Pause();
             continue;
@@ -99,8 +99,8 @@ int main() {
         switch (choice) {
             case 1: {
                 char plaintext[MAX_LEN];
-                char keyStr[AES128_KEY_SIZE + 2];
-                char hexCipher[MAX_LEN * 2 + 1];
+                char keyStr[AES128_KEY_SIZE+2];
+                char hexCipher[MAX_LEN*2+1];
 
                 if (!ReadLine("请输入明文（任意字符串）: ", plaintext, sizeof(plaintext), -1)) break;
                 if (!ReadLine("请输入16字节密钥（刚好16个字符）: ", keyStr, sizeof(keyStr), AES128_KEY_SIZE)) break;
@@ -111,21 +111,21 @@ int main() {
                 break;
             }
             case 2: {
-                char hexCipher[MAX_LEN * 2 + 1];
-                char keyStr[AES128_KEY_SIZE + 2];
+                char hexCipher[MAX_LEN*2+1];
+                char keyStr[AES128_KEY_SIZE+2];
                 char plaintext[MAX_LEN];
                 uint8_t cipherBytes[MAX_LEN];
                 int cipherLen;
 
                 if (!ReadLine("请输入密文（十六进制字符串）: ", hexCipher, sizeof(hexCipher), -1)) break;
-                cipherLen = hexToBytes(hexCipher, cipherBytes, sizeof(cipherBytes));
-                if (cipherLen < 0 || cipherLen % AES_BLOCK_SIZE != 0) {
+                cipherLen=hexToBytes(hexCipher, cipherBytes, sizeof(cipherBytes));
+                if (cipherLen<0 || cipherLen % AES_BLOCK_SIZE != 0) {
                     printf("密文格式错误，必须是偶数长度的十六进制字符串！\n");
                     Pause(); break;
                 }
 
-                int retry = 3;
-                int success = 0;
+                int retry=3;
+                int success=0;
                 while (retry > 0) {
                     printf("请输入16字节密钥（剩余机会 %d 次）: ", retry);
                     if (!ReadLine(NULL, keyStr, sizeof(keyStr), AES128_KEY_SIZE)) {
@@ -134,7 +134,7 @@ int main() {
 
                     if (AES_DecryptBytes(cipherBytes, cipherLen, keyStr, plaintext) == 0) {
                         printf("解密成功！明文: %s\n", plaintext);
-                        success = 1;
+                        success=1;
                         break;
                     } else {
                         retry--;
@@ -175,7 +175,7 @@ void clearInputBuffer() {
 
 int input(char c) {
     if ('0' <= c && c <= '9')
-        return c - '0';
+        return c-'0';
     else
         return -1;
 }
@@ -188,8 +188,8 @@ bool ReadLine(const char *prompt, char *buf, int maxLen, int exactLen) {
         return false;
     }
 
-    size_t len = strlen(buf);
-    if (len == (size_t)(maxLen - 1) && buf[len - 1] != '\n') {
+    size_t len=strlen(buf);
+    if (len == (size_t)(maxLen-1) && buf[len-1] != '\n') {
         clearInputBuffer();
         if (exactLen >= 0) {
             printf("输入过长！只需要 %d 个字符。\n", exactLen);
@@ -197,7 +197,7 @@ bool ReadLine(const char *prompt, char *buf, int maxLen, int exactLen) {
         }
         printf("注意：输入被截断。\n");
     } else {
-        buf[strcspn(buf, "\n")] = '\0';
+        buf[strcspn(buf, "\n")]='\0';
     }
 
     if (strlen(buf) == 0) {
@@ -215,58 +215,58 @@ bool ReadLine(const char *prompt, char *buf, int maxLen, int exactLen) {
 void AES128_KeyExpansion(const uint8_t *key, uint8_t *roundKeys) {
     int i, j;
     uint8_t temp[4], k;
-    for (i = 0; i < 4; i++)
-        for (j = 0; j < 4; j++)
-            roundKeys[(i * 4) + j] = key[(i * 4) + j];
-    for (i = 4; i < 44; i++) {
-        for (j = 0; j < 4; j++) temp[j] = roundKeys[((i - 1) * 4) + j];
+    for (i=0; i<4; i++)
+        for (j=0; j<4; j++)
+            roundKeys[(i*4)+j]=key[(i*4)+j];
+    for (i=4; i<44; i++) {
+        for (j=0; j<4; j++) temp[j]=roundKeys[((i-1)*4)+j];
         if (i % 4 == 0) {
-            k = temp[0]; temp[0] = temp[1]; temp[1] = temp[2]; temp[2] = temp[3]; temp[3] = k;
-            for (j = 0; j < 4; j++) temp[j] = sbox[temp[j]];
-            temp[0] ^= Rcon[i / 4];
+            k=temp[0]; temp[0]=temp[1]; temp[1]=temp[2]; temp[2]=temp[3]; temp[3]=k;
+            for (j=0; j<4; j++) temp[j]=sbox[temp[j]];
+            temp[0] ^= Rcon[i/4];
         }
-        for (j = 0; j < 4; j++)
-            roundKeys[(i * 4) + j] = roundKeys[((i - 4) * 4) + j] ^ temp[j];
+        for (j=0; j<4; j++)
+            roundKeys[(i*4)+j]=roundKeys[((i-4)*4)+j]^temp[j];
     }
 }
 
 void AddRoundKey(uint8_t *state, const uint8_t *roundKey) {
-    for (int i = 0; i < 16; i++) state[i] ^= roundKey[i];
+    for (int i=0; i<16; i++) state[i] ^= roundKey[i];
 }
 
 void SubBytes(uint8_t *state) {
-    for (int i = 0; i < 16; i++) state[i] = sbox[state[i]];
+    for (int i=0; i<16; i++) state[i]=sbox[state[i]];
 }
 
 void InvSubBytes(uint8_t *state) {
-    for (int i = 0; i < 16; i++) state[i] = inv_sbox[state[i]];
+    for (int i=0; i<16; i++) state[i]=inv_sbox[state[i]];
 }
 
 void ShiftRows(uint8_t *state) {
     uint8_t t;
-    t = state[1]; state[1] = state[5]; state[5] = state[9]; state[9] = state[13]; state[13] = t;
-    t = state[2]; state[2] = state[10]; state[10] = t;
-    t = state[6]; state[6] = state[14]; state[14] = t;
-    t = state[15]; state[15] = state[11]; state[11] = state[7]; state[7] = state[3]; state[3] = t;
+    t=state[1]; state[1]=state[5]; state[5]=state[9]; state[9]=state[13]; state[13]=t;
+    t=state[2]; state[2]=state[10]; state[10]=t;
+    t=state[6]; state[6]=state[14]; state[14]=t;
+    t=state[15]; state[15]=state[11]; state[11]=state[7]; state[7]=state[3]; state[3]=t;
 }
 
 void InvShiftRows(uint8_t *state) {
     uint8_t t;
-    t = state[13]; state[13] = state[9]; state[9] = state[5]; state[5] = state[1]; state[1] = t;
-    t = state[2]; state[2] = state[10]; state[10] = t;
-    t = state[6]; state[6] = state[14]; state[14] = t;
-    t = state[3]; state[3] = state[7]; state[7] = state[11]; state[11] = state[15]; state[15] = t;
+    t=state[13]; state[13]=state[9]; state[9]=state[5]; state[5]=state[1]; state[1]=t;
+    t=state[2]; state[2]=state[10]; state[10]=t;
+    t=state[6]; state[6]=state[14]; state[14]=t;
+    t=state[3]; state[3]=state[7]; state[7]=state[11]; state[11]=state[15]; state[15]=t;
 }
 
 uint8_t xtime(uint8_t x) {
-    return (uint8_t)((x << 1) ^ (((x >> 7) & 1) * 0x1b));
+    return (uint8_t)((x << 1)^(((x >> 7) & 1)*0x1b));
 }
 
 uint8_t Multiply(uint8_t a, uint8_t b) {
-    uint8_t res = 0;
+    uint8_t res=0;
     while (b) {
         if (b & 1) res ^= a;
-        uint8_t hi = a & 0x80;
+        uint8_t hi=a & 0x80;
         a <<= 1;
         if (hi) a ^= 0x1b;
         b >>= 1;
@@ -276,25 +276,25 @@ uint8_t Multiply(uint8_t a, uint8_t b) {
 
 void MixColumns(uint8_t *state) {
     uint8_t tmp[4];
-    for (int col = 0; col < 4; col++) {
-        int base = col * 4;
-        for (int i = 0; i < 4; i++) tmp[i] = state[base + i];
-        state[base + 0] = Multiply(tmp[0], 2) ^ Multiply(tmp[1], 3) ^ tmp[2] ^ tmp[3];
-        state[base + 1] = tmp[0] ^ Multiply(tmp[1], 2) ^ Multiply(tmp[2], 3) ^ tmp[3];
-        state[base + 2] = tmp[0] ^ tmp[1] ^ Multiply(tmp[2], 2) ^ Multiply(tmp[3], 3);
-        state[base + 3] = Multiply(tmp[0], 3) ^ tmp[1] ^ tmp[2] ^ Multiply(tmp[3], 2);
+    for (int col=0; col<4; col++) {
+        int base=col*4;
+        for (int i=0; i<4; i++) tmp[i]=state[base+i];
+        state[base+0]=Multiply(tmp[0], 2)^Multiply(tmp[1], 3)^tmp[2]^tmp[3];
+        state[base+1]=tmp[0]^Multiply(tmp[1], 2)^Multiply(tmp[2], 3)^tmp[3];
+        state[base+2]=tmp[0]^tmp[1]^Multiply(tmp[2], 2)^Multiply(tmp[3], 3);
+        state[base+3]=Multiply(tmp[0], 3)^tmp[1]^tmp[2]^Multiply(tmp[3], 2);
     }
 }
 
 void InvMixColumns(uint8_t *state) {
     uint8_t tmp[4];
-    for (int col = 0; col < 4; col++) {
-        int base = col * 4;
-        for (int i = 0; i < 4; i++) tmp[i] = state[base + i];
-        state[base + 0] = Multiply(tmp[0], 14) ^ Multiply(tmp[1], 11) ^ Multiply(tmp[2], 13) ^ Multiply(tmp[3], 9);
-        state[base + 1] = Multiply(tmp[0], 9)  ^ Multiply(tmp[1], 14) ^ Multiply(tmp[2], 11) ^ Multiply(tmp[3], 13);
-        state[base + 2] = Multiply(tmp[0], 13) ^ Multiply(tmp[1], 9)  ^ Multiply(tmp[2], 14) ^ Multiply(tmp[3], 11);
-        state[base + 3] = Multiply(tmp[0], 11) ^ Multiply(tmp[1], 13) ^ Multiply(tmp[2], 9)  ^ Multiply(tmp[3], 14);
+    for (int col=0; col<4; col++) {
+        int base=col*4;
+        for (int i=0; i<4; i++) tmp[i]=state[base+i];
+        state[base+0]=Multiply(tmp[0], 14)^Multiply(tmp[1], 11)^Multiply(tmp[2], 13)^Multiply(tmp[3], 9);
+        state[base+1]=Multiply(tmp[0], 9) ^Multiply(tmp[1], 14)^Multiply(tmp[2], 11)^Multiply(tmp[3], 13);
+        state[base+2]=Multiply(tmp[0], 13)^Multiply(tmp[1], 9) ^Multiply(tmp[2], 14)^Multiply(tmp[3], 11);
+        state[base+3]=Multiply(tmp[0], 11)^Multiply(tmp[1], 13)^Multiply(tmp[2], 9) ^Multiply(tmp[3], 14);
     }
 }
 
@@ -302,26 +302,26 @@ void AES128_EncryptBlock(const uint8_t *in, uint8_t *out, const uint8_t *rk) {
     uint8_t state[16];
     memcpy(state, in, 16);
     AddRoundKey(state, rk);
-    for (int round = 1; round <= 9; round++) {
+    for (int round=1; round <= 9; round++) {
         SubBytes(state);
         ShiftRows(state);
         MixColumns(state);
-        AddRoundKey(state, rk + round * 16);
+        AddRoundKey(state, rk+round*16);
     }
     SubBytes(state);
     ShiftRows(state);
-    AddRoundKey(state, rk + 160);
+    AddRoundKey(state, rk+160);
     memcpy(out, state, 16);
 }
 
 void AES128_DecryptBlock(const uint8_t *in, uint8_t *out, const uint8_t *rk) {
     uint8_t state[16];
     memcpy(state, in, 16);
-    AddRoundKey(state, rk + 160);
-    for (int round = 9; round >= 1; round--) {
+    AddRoundKey(state, rk+160);
+    for (int round=9; round >= 1; round--) {
         InvShiftRows(state);
         InvSubBytes(state);
-        AddRoundKey(state, rk + round * 16);
+        AddRoundKey(state, rk+round*16);
         InvMixColumns(state);
     }
     InvShiftRows(state);
@@ -331,19 +331,19 @@ void AES128_DecryptBlock(const uint8_t *in, uint8_t *out, const uint8_t *rk) {
 }
 
 void bytesToHex(const uint8_t *b, int n, char *h) {
-    for (int i = 0; i < n; i++) sprintf(h + i * 2, "%02x", b[i]);
-    h[n * 2] = 0;
+    for (int i=0; i<n; i++) sprintf(h+i*2, "%02x", b[i]);
+    h[n*2]=0;
 }
 
 int hexToBytes(const char *h, uint8_t *b, int max) {
-    int len = strlen(h);
+    int len=strlen(h);
     if (len % 2) return -1;
-    int blen = len / 2;
+    int blen=len/2;
     if (blen > max) return -1;
-    for (int i = 0; i < blen; i++) {
+    for (int i=0; i<blen; i++) {
         unsigned v;
-        if (sscanf(h + i * 2, "%2x", &v) != 1) return -1;
-        b[i] = (uint8_t)v;
+        if (sscanf(h+i*2, "%2x", &v) != 1) return -1;
+        b[i]=(uint8_t)v;
     }
     return blen;
 }
@@ -353,15 +353,15 @@ void AES_Encrypt(const char *pt, const char *keyStr, char *hex) {
     memcpy(key, keyStr, 16);
     uint8_t rk[176];
     AES128_KeyExpansion(key, rk);
-    int len = strlen(pt);
-    int pad = ((len / 16) + 1) * 16;
-    uint8_t *p = (uint8_t*)malloc(pad);
+    int len=strlen(pt);
+    int pad=((len/16)+1)*16;
+    uint8_t *p=(uint8_t*)malloc(pad);
     memcpy(p, pt, len);
-    uint8_t pv = pad - len;
-    for (int i = len; i < pad; i++) p[i] = pv;
-    uint8_t *c = (uint8_t*)malloc(pad);
-    for (int i = 0; i < pad; i += 16)
-        AES128_EncryptBlock(p + i, c + i, rk);
+    uint8_t pv=pad-len;
+    for (int i=len; i<pad; i++) p[i]=pv;
+    uint8_t *c=(uint8_t*)malloc(pad);
+    for (int i=0; i<pad; i += 16)
+        AES128_EncryptBlock(p+i, c+i, rk);
     bytesToHex(c, pad, hex);
     free(p);
     free(c);
@@ -373,24 +373,24 @@ int AES_DecryptBytes(const uint8_t *cipher, int len, const char *keyStr, char *p
     memcpy(key, keyStr, 16);
     uint8_t rk[176];
     AES128_KeyExpansion(key, rk);
-    uint8_t *dec = (uint8_t*)malloc(len);
-    for (int i = 0; i < len; i += 16)
-        AES128_DecryptBlock(cipher + i, dec + i, rk);
-    uint8_t pv = dec[len - 1];
-    if (pv < 1 || pv > 16) { free(dec); return -1; }
-    for (int i = len - pv; i < len; i++)
+    uint8_t *dec=(uint8_t*)malloc(len);
+    for (int i=0; i<len; i += 16)
+        AES128_DecryptBlock(cipher+i, dec+i, rk);
+    uint8_t pv=dec[len-1];
+    if (pv<1 || pv > 16) { free(dec); return -1; }
+    for (int i=len-pv; i<len; i++)
         if (dec[i] != pv) { free(dec); return -1; }
-    int outLen = len - pv;
+    int outLen=len-pv;
     memcpy(pt, dec, outLen);
-    pt[outLen] = 0;
+    pt[outLen]=0;
     free(dec);
     return 0;
 }
 
 void AES_Decrypt(const char *hex, const char *keyStr, char *pt) {
     uint8_t buf[MAX_LEN];
-    int len = hexToBytes(hex, buf, sizeof(buf));
-    if (len < 0) { strcpy(pt, "密文格式错误"); return; }
+    int len=hexToBytes(hex, buf, sizeof(buf));
+    if (len<0) { strcpy(pt, "密文格式错误"); return; }
     if (AES_DecryptBytes(buf, len, keyStr, pt))
         strcpy(pt, "填充错误，可能密钥不正确");
 }
