@@ -434,7 +434,7 @@ bool loadKeys(const char* path, ull &n, ull &e, ull &d)
 
 void genKeys(ull &n, ull &e, ull &d)
 {
-    // 这里为演示使用 32 位素数，真实应用需使用 1024+ 位大数库
+    // 这里为演示使用 32 位素数
     ull p = genPrime(32);
     ull q = genPrime(32);
     while(q == p) q = genPrime(32);
