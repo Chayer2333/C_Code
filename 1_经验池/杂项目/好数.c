@@ -1,8 +1,8 @@
-#include<stdio.h>
+ï»¿#include<stdio.h>
 int main()
 {
 	int inf,n,m,t=1,key,i,j=0;
-	printf("ÇëÊäÈëÉÏÏŞ£º\n");
+	printf("è¯·è¾“å…¥ä¸Šé™ï¼š\n");
 	scanf("%d",&inf);
 	for(m=1;m<=inf;m++)
 	{

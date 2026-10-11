@@ -1,8 +1,8 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 int main()
 {
 	float x,y;
-	printf("ÇëÊäÈëxµÄÖ»£º\n");
+	printf("è¯·è¾“å…¥xçš„åªï¼š\n");
 	scanf("%f",&x);
 	if(x>=0)
 	{

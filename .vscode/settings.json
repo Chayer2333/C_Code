@@ -26,6 +26,7 @@
         "commentTranslate.targetLanguage": "zh-CN",
         "commentTranslate.hover.enabled": true,
         "commentTranslate.source": "Bing",
-        "commentTranslate.multiLineMerge": false
+        "commentTranslate.multiLineMerge": false,
+        "makefile.makefilePath": ""
 //  }
 }
